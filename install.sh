@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# 设置变量
+DOTFILES_DIR="$HOME/my_dotfiles"
+CONFIG_DIR="$HOME/.config"
+DIRS=(i3 kitty polybar rofi fastfetch)
+
+echo "正在将配置文件复制到 $CONFIG_DIR ..."
+
+# 遍历每个目录
+for dir in "${DIRS[@]}"; do
+    SRC="$DOTFILES_DIR/$dir"
+    DEST="$CONFIG_DIR/$dir"
+
+    # 创建目标目录
+    mkdir -p "$DEST"
+
+    # 复制内容
+    cp -r "$SRC/"* "$DEST/"
+    echo "已复制 $dir 到 $DEST"
+done
+
+# 单独处理 picom.conf
+cp "$DOTFILES_DIR/picom.conf" "$CONFIG_DIR/picom.conf"
+echo "已复制 picom.conf 到 $CONFIG_DIR"
+
+echo "配置文件复制完成。"
