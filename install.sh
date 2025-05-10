@@ -3,7 +3,7 @@
 # 设置变量
 DOTFILES_DIR="$HOME/my_dotfiles"
 CONFIG_DIR="$HOME/.config"
-DIRS=(i3 kitty polybar rofi fastfetch)
+DIRS=(i3 kitty polybar rofi fastfetch dunst)
 
 echo "正在将配置文件复制到 $CONFIG_DIR ..."
 
@@ -23,5 +23,6 @@ done
 # 单独处理 picom.conf
 cp "$DOTFILES_DIR/picom.conf" "$CONFIG_DIR/picom.conf"
 echo "已复制 picom.conf 到 $CONFIG_DIR"
+sudo chmod +x ~/.config/i3/*.sh
 
 echo "配置文件复制完成。"

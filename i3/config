@@ -1,114 +1,109 @@
 font pango:Noto Sans CJK SC 10
-for_window [class=".*"] border none
+for_window [class=".*"] border pixel 2
+new_window 1pixel
 for_window [class="QQ"] floating enable
-gaps inner 4
+for_window [class="scrcpy"] floating enable
+for_window [class="dolphin"] floating enable
+for_window [class="Telegram"] floating enable
+gaps inner 5
 gaps outer 0
 
 
+client.focused          #593B80 #5F49A4 #593B80 #2E9EF4   #285577
+client.focused_inactive #414141 #5F676A #FFFFFF #484E50   #5F676A
+client.unfocused        #4A4A4A #222222 #888888 #292D2E   #222222
+client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 # 设置Mod键为SUPER
-set $mod Mod4
+set $win Mod4
+set $alt Mod1
 
 # 杀死当前窗口
-bindsym $mod+c kill
+bindsym $win+c kill
 
 # 打开 kitty 终端
-bindsym $mod+t exec kitty
+bindsym $win+t exec ~/.config/i3/start_kitty.sh
 
 # 退出 i3
-bindsym $mod+m exit
+bindsym $win+m exit
 
 # 打开文件管理器 dolphin
-bindsym $mod+e exec dolphin
+bindsym $win+e exec thunar
 
 # 切换浮动模式
-bindsym $mod+v floating toggle
+bindsym $win+v floating toggle
 
 # 启动程序启动器（tofi-drun 替代 dmenu）
-bindsym $mod+r exec rofi -show run
+bindsym $win+r exec ~/.config/i3/start_rofi.sh
 
 # 切换伪平铺模式（i3没有dwindle，通常无对应功能）
 # 可自行设置备用功能
 
 # 切换分割方向
-bindsym $mod+j split toggle
+bindsym $win+j split toggle
 
 # 当前窗口全屏切换
-bindsym $mod+f fullscreen toggle
+bindsym $win+f fullscreen toggle
 
 # 将活动窗口置顶（i3没有 bring-to-top，忽略或自定义）
 
 # 打开显示器（DPMS）
-bindsym $mod+o exec xset dpms force on
+bindsym $win+o exec xset dpms force on
 
 # 锁屏（调用i3lock）
-bindsym $mod+l exec ~/.config/i3/start_i3lock.sh
-
-# 将窗口钉住（i3无pin功能，可忽略）
+bindsym $win+l exec ~/.config/i3/start_i3lock.sh
 
 # 用 grim+slurp+swappy 截图（区域截图+注释）
-bindsym $mod+s exec scrot -s ~/Pictures/screenshot.jpg
+bindsym $win+s exec scrot -s ~/Pictures/screenshot.jpg
 
 # 重新加载 polybar
-bindsym $mod+Ctrl+Mod1+r exec ~/.config/i3/restart_polybar.sh
+bindsym $win+Ctrl+$alt+r exec ~/.config/i3/restart_polybar.sh
 
 # 重新加载 fcitx5
-bindsym $mod+Ctrl+Mod1+Shift+r exec ~/.config/i3/restart_fcitx5.sh
+bindsym $win+Ctrl+$alt+Shift+r exec ~/.config/i3/restart_fcitx5.sh
 
-# 截取当前活动窗口到剪贴板
-bindsym $mod+Shift+w exec grim -g "$(hyprctl -j activewindow | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" - | wl-copy
 
-# 截取全屏到剪贴板
-bindsym Print exec grim - | wl-copy
-
-# OBS 开始录制
-bindsym $mod+Home exec obs-cli recording start --host 127.0.0.1 --port 50000
-
-# OBS 停止录制
-bindsym $mod+End exec obs-cli recording stop --host 127.0.0.1 --port 50000
+bindsym $win+p exec ~/.config/i3/start_powermenu.sh
 
 # 用方向键切换窗口焦点
-bindsym $mod+Left focus left
-bindsym $mod+Right focus right
-bindsym $mod+Up focus up
-bindsym $mod+Down focus down
+bindsym $win+Left focus left
+bindsym $win+Right focus right
+bindsym $win+Up focus up
+bindsym $win+Down focus down
 
-# 使用鼠标移动和调整窗口
-bindsym --whole-window $mod+Button1 move
-bindsym --whole-window $mod+Button3 resize
 
 # 使用数字键切换工作区
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $win+1 workspace 1
+bindsym $win+2 workspace 2
+bindsym $win+3 workspace 3
+bindsym $win+4 workspace 4
+bindsym $win+5 workspace 5
+bindsym $win+6 workspace 6
+bindsym $win+7 workspace 7
+bindsym $win+8 workspace 8
+bindsym $win+9 workspace 9
+bindsym $win+0 workspace 10
 
 # 使用Shift+数字键移动窗口到指定工作区
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $win+Shift+1 move container to workspace 1
+bindsym $win+Shift+2 move container to workspace 2
+bindsym $win+Shift+3 move container to workspace 3
+bindsym $win+Shift+4 move container to workspace 4
+bindsym $win+Shift+5 move container to workspace 5
+bindsym $win+Shift+6 move container to workspace 6
+bindsym $win+Shift+7 move container to workspace 7
+bindsym $win+Shift+8 move container to workspace 8
+bindsym $win+Shift+9 move container to workspace 9
+bindsym $win+Shift+0 move container to workspace 10
 
-# 使用滚轮切换工作区
-bindsym $mod+button4 workspace next
-bindsym $mod+button5 workspace prev
+# 按下win键时，可以使用鼠标移动窗口位置，以及改变窗口大小
+floating_modifier $win  
 
-# 绑定屏幕移动（多显示器支持）
-bindsym $mod+Shift+comma move workspace to output left
-bindsym $mod+Shift+period move workspace to output right
-
-
-
+exec ~/.config/i3/ig3-video-wallpaper/setup.sh -anwb ~/Videos/Nahida/nahida4.mp4 
+exec feh --bg-scale ~/Pictures/bg.jpg
 exec --no-startup-id picom --config ~/.config/picom.conf
 exec polybar
+exec --no-startup-id dunst
+exec fcitx5
+exec /usr/lib/xfce-polkit/xfce-polkit
+exec nm-applet

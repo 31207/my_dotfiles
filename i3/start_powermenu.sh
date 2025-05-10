@@ -2,21 +2,21 @@
 
 # 主题文件的路径
 dir="$HOME/.config/rofi/powermenu/" # 主题文件夹
-theme="default"                     # 默认主题
+theme="mytheme"                     # 默认主题
 
 # 部分提示信息：
 host="$USER"                        # 主机名称
 uptime="$(uptime -p | sed -e 's/up //g')" # 登陆时长
 
 # 选项列表
-lock="$(echo -e '\uf023')"      # 锁屏
-reboot="$(echo -e '\uf021')"    # 重启
-shutdown="$(echo -e '\uf011')"  # 关机
-hibernate="$(echo -e '\uf186')" # 休眠
-suspend="$(echo -e '\uf0f4')"   # 挂起
-logout="$(echo -e '\uf08b')"    # 登出
-yes="$(echo -e '\uf058')"       # 同意
-no="$(echo -e '\uf057')"        # 取消
+lock="$(echo -e '\uf023 锁屏')"      # 锁屏
+reboot="$(echo -e '\uf021 重启')"    # 重启
+shutdown="$(echo -e '\uf011 关机')"  # 关机
+hibernate="$(echo -e '\uf186 休眠')" # 休眠
+suspend="$(echo -e '\uf0f4 挂起')"   # 挂起
+logout="$(echo -e '\uf08b 登出')"    # 登出
+yes="$(echo -e '\uf058 同意')"       # 同意
+no="$(echo -e '\uf057 取消')"        # 取消
 
 # 部分符号
 user="$(echo -e '\uf007')"  # 用户符号
@@ -116,4 +116,4 @@ main() {
   esac
 }
 
-main
+main &

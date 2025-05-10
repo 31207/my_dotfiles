@@ -7,4 +7,4 @@ TEXT='#00897bE6'
 WRONG='#880000bb'
 VERIFYING='#00564dE6'
 
-i3lock 
+i3lock &
