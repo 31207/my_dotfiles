@@ -39,7 +39,7 @@ run_confirm() {
 }
 
 confirm_cmd() {
-  rofi -theme-str "window {location: center; anchor: center; fullscreen: false; width: 350px;}" \
+  rofi -theme-str "window {location: center; anchor: center; fullscreen: false; width: 460px;}" \
     -theme-str "mainbox {orientation: vertical; children: [ "message", "listview" ];}" \
     -theme-str "listview {columns: 2; lines: 1;}" \
     -theme-str "element-text {horizontal-align: 0.5;}" \
@@ -54,7 +54,7 @@ confirm_cmd() {
 # 关机操作
 shutdown_action() {
   isconfirm="$(run_confirm)"
-  if [[ $isconfirm == $confirm ]]; then
+  if [[ $isconfirm == $yes ]]; then
     systemctl poweroff
   fi
 }
@@ -62,7 +62,7 @@ shutdown_action() {
 # 重启操作
 reboot_action() {
   isconfirm="$(run_confirm)"
-  if [[ $isconfirm == $confirm ]]; then
+  if [[ $isconfirm == $yes ]]; then
     systemctl reboot
   fi
 }
@@ -70,7 +70,7 @@ reboot_action() {
 # 休眠操作
 hibernate_action() {
   isconfirm="$(run_confirm)"
-  if [[ $isconfirm == $confirm ]]; then
+  if [[ $isconfirm == $yes ]]; then
     systemctl hibernate
   fi
 }
@@ -78,7 +78,7 @@ hibernate_action() {
 # 挂起操作
 suspend_action() {
   isconfirm="$(run_confirm)"
-  if [[ $isconfirm == $confirm ]]; then
+  if [[ $isconfirm == $yes ]]; then
     mpc -q pause
     amixer set Master mute
     systemctl suspend
@@ -88,7 +88,7 @@ suspend_action() {
 # 登出操作
 logout_action() {
   isconfirm="$(run_confirm)"
-  if [[ $isconfirm == $confirm ]]; then
+  if [[ $isconfirm == $yes ]]; then
     dwm_pid="$(pidof -s dwm)"
     if [[ -n $dwm_pid ]]; then
       kill -TERM $dwm_pid
