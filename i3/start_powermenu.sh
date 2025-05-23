@@ -99,7 +99,7 @@ logout_action() {
 # 锁屏操作
 lock_action() {
   if [[ -x '/usr/bin/i3lock' ]]; then
-    i3lock
+    ~/.config/i3/start_i3lock.sh
   fi
 }
 

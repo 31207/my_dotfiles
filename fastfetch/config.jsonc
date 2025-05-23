@@ -1,8 +1,10 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
+    "type": "auto", // Logo type: auto, builtin, small, file, etc.
+    "source": "~/.config/fastfetch/shit",
     "padding": {
-      "top": 2,
+      "top": 0,
       "left": 1,
       "right": 2
     }
@@ -11,11 +13,6 @@
     "separator": "  "
   },
   "modules": [
-    // Title
-    {
-      "type": "title",
-      "format": "{#1}╭───────────── {#}{user-name-colored}"
-    },
     // System Information
     {
       "type": "custom",
@@ -57,11 +54,13 @@
     },
     {
       "type": "wmtheme",
-      "key": "{#separator}│  {#keys}󰉼 Theme"
+      "key": "{#separator}│  {#keys}󰉼 Theme",
+      "format": "{name}"
     },
     {
       "type": "display",
-      "key": "{#separator}│  {#keys}󰹑 Resolution"
+      "key": "{#separator}│  {#keys}󰹑 Resolution",
+      "format": "{width}x{height}@{refresh-rate}Hz"
     },
     {
       "type": "shell",
@@ -69,7 +68,8 @@
     },
     {
       "type": "terminalfont",
-      "key": "{#separator}│  {#keys}󰛖 Font"
+      "key": "{#separator}│  {#keys}󰛖 Font",
+      "format": "{name}"
     },
     {
       "type": "custom",
@@ -82,20 +82,24 @@
     },
     {
       "type": "cpu",
-      "key": "{#separator}│  {#keys}󰻠 CPU"
+      "key": "{#separator}│  {#keys}󰻠 CPU",
+      "format": "{name}" // 只显示 CPU 名称，不带额外说明
     },
     {
       "type": "gpu",
-      "key": "{#separator}│  {#keys}󰢮 GPU"
+      "key": "{#separator}│  {#keys}󰢮 GPU",
+      "format": "{name}" // 只显示 GPU 名称
     },
     {
       "type": "memory",
-      "key": "{#separator}│  {#keys}󰍛 Memory"
+      "key": "{#separator}│  {#keys}󰍛 Memory",
+      "format": "{used}/{total}" // 简洁地显示已用/总内存
     },
     {
       "type": "disk",
       "key": "{#separator}│  {#keys}󰋊 Disk (/)",
-      "folders": "/"
+      "folders": "/",
+      "format": "{size-used}/{size-total}" // 只显示已用/总空间
     },
     {
       "type": "custom",
@@ -106,11 +110,6 @@
       "type": "colors",
       "key": "{#separator}│",
       "symbol": "circle"
-    },
-    // Footer
-    {
-      "type": "custom",
-      "format": "{#1}╰───────────────────────────────╯"
     }
   ]
 }

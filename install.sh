@@ -3,7 +3,7 @@
 # 设置变量
 DOTFILES_DIR="$HOME/my_dotfiles"
 CONFIG_DIR="$HOME/.config"
-DIRS=(i3 kitty polybar rofi fastfetch dunst)
+DIRS=(i3 kitty polybar rofi fastfetch dunst go-musicfox conky alacritty)
 
 echo "正在将配置文件复制到 $CONFIG_DIR ..."
 
@@ -11,12 +11,12 @@ echo "正在将配置文件复制到 $CONFIG_DIR ..."
 for dir in "${DIRS[@]}"; do
     SRC="$DOTFILES_DIR/$dir"
     DEST="$CONFIG_DIR/$dir"
-
+    sudo rm -rf "$DEST"
     # 创建目标目录
-    mkdir -p "$DEST"
+    sudo mkdir -p "$DEST"
 
     # 复制内容
-    cp -r "$SRC/"* "$DEST/"
+    sudo cp -r "$SRC/"* "$DEST/"
     echo "已复制 $dir 到 $DEST"
 done
 

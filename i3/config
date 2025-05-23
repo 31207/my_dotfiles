@@ -1,11 +1,12 @@
 font pango:Noto Sans CJK SC 10
-for_window [class=".*"] border pixel 2
+for_window [class=".*"] border pixel 1
 new_window 1pixel
 for_window [class="QQ"] floating enable
 for_window [class="scrcpy"] floating enable
 for_window [class="dolphin"] floating enable
 for_window [class="Telegram"] floating enable
-gaps inner 5
+for_window [class="pavucontrol"] floating enable
+gaps inner 0
 gaps outer 0
 
 
@@ -21,8 +22,8 @@ set $alt Mod1
 # 杀死当前窗口
 bindsym $win+c kill
 
-# 打开 kitty 终端
-bindsym $win+t exec ~/.config/i3/start_kitty.sh
+# 打开 alacritty 终端
+bindsym $win+t exec ~/.config/i3/start_alacritty.sh
 
 # 退出 i3
 bindsym $win+m exit
@@ -34,7 +35,7 @@ bindsym $win+e exec thunar
 bindsym $win+v floating toggle
 
 # 启动程序启动器（tofi-drun 替代 dmenu）
-bindsym $win+r exec ~/.config/i3/start_rofi.sh
+bindsym $win+r exec ~/.config/polybar/forest/scripts/launcher.sh
 
 # 切换伪平铺模式（i3没有dwindle，通常无对应功能）
 # 可自行设置备用功能
@@ -53,7 +54,7 @@ bindsym $win+o exec xset dpms force on
 # 锁屏（调用i3lock）
 bindsym $win+l exec ~/.config/i3/start_i3lock.sh
 
-# 用 grim+slurp+swappy 截图（区域截图+注释）
+# 用 scort 截图
 bindsym $win+s exec scrot -s ~/Pictures/screenshot.jpg
 
 # 重新加载 polybar
@@ -62,8 +63,21 @@ bindsym $win+Ctrl+$alt+r exec ~/.config/i3/restart_polybar.sh
 # 重新加载 fcitx5
 bindsym $win+Ctrl+$alt+Shift+r exec ~/.config/i3/restart_fcitx5.sh
 
+# 电源菜单
+bindsym $win+p exec ~/.config/polybar/forest/scripts/powermenu.sh
 
-bindsym $win+p exec ~/.config/i3/start_powermenu.sh
+# 快速启动QQ
+bindsym $win+q exec linuxqq
+
+# 快速启动edge
+bindsym $win+b exec microsoft-edge-stable
+
+# Increase brightness with Win+F4
+bindsym $win+plus exec --no-startup-id brightnessctl s +10%
+
+# Decrease brightness with Win+F3
+bindsym $win+minus exec --no-startup-id brightnessctl s 10%-
+
 
 # 用方向键切换窗口焦点
 bindsym $win+Left focus left
@@ -99,11 +113,12 @@ bindsym $win+Shift+0 move container to workspace 10
 # 按下win键时，可以使用鼠标移动窗口位置，以及改变窗口大小
 floating_modifier $win  
 
-exec ~/.config/i3/ig3-video-wallpaper/setup.sh -anwb ~/Videos/Nahida/nahida4.mp4 
-exec feh --bg-scale ~/Pictures/bg.jpg
+# exec ~/.config/i3/i3-video-wallpaper/setup.sh -anwb ~/Videos/Nahida/nahida4.mp4 
+exec feh --bg-scale ~/Pictures/bg.png
 exec --no-startup-id picom --config ~/.config/picom.conf
-exec polybar
+exec ~/.config/polybar/forest/launch.sh
 exec --no-startup-id dunst
 exec fcitx5
 exec /usr/lib/xfce-polkit/xfce-polkit
 exec nm-applet
+exec conky

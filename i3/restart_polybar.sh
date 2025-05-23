@@ -1,3 +1,3 @@
 #!/bin/sh
 killall -q polybar
-polybar &
+~/.config/polybar/forest/launch.sh &
