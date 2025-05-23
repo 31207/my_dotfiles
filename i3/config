@@ -23,8 +23,8 @@ set $alt Mod1
 bindsym $win+c kill
 
 # 打开 alacritty 终端
-bindsym $win+t exec ~/.config/i3/start_alacritty.sh
-
+# bindsym $win+t exec ~/.config/i3/start_alacritty.sh
+bindsym $win+t exec ~/.config/i3/start_kitty.sh
 # 退出 i3
 bindsym $win+m exit
 
