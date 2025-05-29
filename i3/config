@@ -72,11 +72,14 @@ bindsym $win+q exec linuxqq
 # 快速启动edge
 bindsym $win+b exec microsoft-edge-stable
 
-# Increase brightness with Win+F4
+# Increase brightness with Win+Plus
 bindsym $win+plus exec --no-startup-id brightnessctl s +10%
 
-# Decrease brightness with Win+F3
+# Decrease brightness with Win+Minus
 bindsym $win+minus exec --no-startup-id brightnessctl s 10%-
+
+# Hide or show the polybar
+bindsym $win+h exec polybar-msg cmd toggle
 
 
 # 用方向键切换窗口焦点
@@ -111,7 +114,7 @@ bindsym $win+Shift+9 move container to workspace 9
 bindsym $win+Shift+0 move container to workspace 10
 
 # 按下win键时，可以使用鼠标移动窗口位置，以及改变窗口大小
-floating_modifier $win  
+floating_modifier $win
 
 # exec ~/.config/i3/i3-video-wallpaper/setup.sh -anwb ~/Videos/Nahida/nahida4.mp4 
 exec feh --bg-scale ~/Pictures/bg.png
@@ -121,4 +124,4 @@ exec --no-startup-id dunst
 exec fcitx5
 exec /usr/lib/xfce-polkit/xfce-polkit
 exec nm-applet
-exec conky
+# exec conky
