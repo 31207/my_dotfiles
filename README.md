@@ -1,2 +1,2 @@
 # my_dotfiles
-Some of my Archlinux dotfiles.
+Some of my nixos dotfiles.
