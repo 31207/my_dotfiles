@@ -164,6 +164,7 @@
   python313Packages.pip
   python313Packages.pipx
   nb-cli
+  go-musicfox
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
