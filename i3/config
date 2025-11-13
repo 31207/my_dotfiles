@@ -67,10 +67,10 @@ bindsym $win+Ctrl+$alt+Shift+r exec ~/.config/i3/restart_fcitx5.sh
 bindsym $win+p exec ~/.config/polybar/forest/scripts/powermenu.sh
 
 # 快速启动QQ
-bindsym $win+q exec linuxqq
+bindsym $win+q exec qq
 
-# 快速启动edge
-bindsym $win+b exec microsoft-edge-stable
+# 快速启动firefox
+bindsym $win+b exec firefox
 
 # Increase brightness with Win+Plus
 bindsym $win+plus exec --no-startup-id brightnessctl s +10%
@@ -116,12 +116,18 @@ bindsym $win+Shift+0 move container to workspace 10
 # 按下win键时，可以使用鼠标移动窗口位置，以及改变窗口大小
 floating_modifier $win
 
+exec export GTK_IM_MODULE=fcitx
+exec export QT_IM_MODULE=fcitx
+exec export XMODIFIERS=fcitx
+exec export SDL_IM_MODULE=fcitx
+
+
 # exec ~/.config/i3/i3-video-wallpaper/setup.sh -anwb ~/Videos/Nahida/nahida4.mp4 
 exec feh --bg-scale ~/Pictures/bg.png
 exec --no-startup-id picom --config ~/.config/picom.conf
 exec ~/.config/polybar/forest/launch.sh
 exec --no-startup-id dunst
 exec fcitx5
-exec /usr/lib/xfce-polkit/xfce-polkit
-exec nm-applet
-# exec conky
+# exec /usr/lib/xfce-polkit/xfce-polkit
+# exec nm-applet
+exec conky

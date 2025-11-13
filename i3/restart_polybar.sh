@@ -1,3 +1,2 @@
-#!/bin/sh
-killall -q polybar
+killall -r "polybar"
 ~/.config/polybar/forest/launch.sh &
