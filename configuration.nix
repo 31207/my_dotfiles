@@ -31,6 +31,54 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+# Enable OpenGL
+  hardware.graphics = {
+    enable = true;
+  };
+
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware.nvidia = {
+
+    # Modesetting is required.
+    modesetting.enable = true;
+
+    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    # Enable this if you have graphical corruption issues or application crashes after waking
+    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
+    # of just the bare essentials.
+    powerManagement.enable = false;
+
+    # Fine-grained power management. Turns off GPU when not in use.
+    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+    powerManagement.finegrained = false;
+
+    # Use the NVidia open source kernel module (not to be confused with the
+    # independent third-party "nouveau" open source driver).
+    # Support is limited to the Turing and later architectures. Full list of 
+    # supported GPUs is at: 
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+    # Only available from driver 515.43.04+
+    open = false;
+
+    # Enable the Nvidia settings menu,
+	# accessible via `nvidia-settings`.
+    nvidiaSettings = true;
+
+    # Optionally, you may need to select the appropriate driver version for your specific GPU.
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+  hardware.nvidia.prime = {
+    reverseSync.enable = true;
+    # Enable if using an external GPU
+    allowExternalGpu = false;
+		# Make sure to use the correct Bus ID values for your system!
+		intelBusId = "PCI:0:2:0";
+		nvidiaBusId = "PCI:1:0:0";
+		# amdgpuBusId = "PCI:54:0:0"; For AMD GPU
+	};
+
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
 
@@ -78,7 +126,7 @@
   services.xserver.windowManager.i3.enable = true;
   services.xserver.displayManager.lightdm = {
     enable = true;
-    background = "/home/dustwind/Pictures/bg.png";
+    # background = "/home/dustwind/Pictures/background/1.png";
   };
 
   
@@ -163,9 +211,59 @@
   python313Packages.python
   python313Packages.pip
   python313Packages.pipx
+  python313Packages.numpy
   nb-cli
   go-musicfox
+  nvtopPackages.nvidia
+  lshw
+  uv
+
+      # create a fhs environment by command `fhs`, so we can run non-nixos packages in nixos!
+    (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
+      pkgs.buildFHSEnv (base // {
+      name = "fhs";
+      targetPkgs = pkgs:
+        # pkgs.buildFHSEnv 只提供一个最小的 FHS 环境，缺少很多常用软件所必须的基础包
+        # 所以直接使用它很可能会报错
+        #
+        # pkgs.appimageTools 提供了大多数程序常用的基础包，所以我们可以直接用它来补充
+        (base.targetPkgs pkgs) ++ (with pkgs; [
+          pkg-config
+          ncurses
+          python313Packages.python
+          python313Packages.pyqt5
+              # core
+          glibc
+          gcc
+          binutils
+
+          # GUI support
+          xorg.libX11
+          xorg.libXrender
+          xorg.libXext
+          xorg.libXrandr
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXfixes
+
+          # GTK/Qt optional
+          gtk3
+          qt5.full
+
+          # fonts
+          fontconfig
+          freetype
+                # 如果你的 FHS 程序还有其他依赖，把它们添加在这里
+        ]
+      );
+      profile = "export FHS=1";
+      runScript = "bash";
+      extraOutputsToInstall = ["dev"];
+    }))
   ];
+
+  environment.variables = {
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -189,6 +287,7 @@
   # };
   programs.fish = {
     enable = true;
+    interactiveShellInit = "functions -e fish_greeting";
   };
 
   fonts.packages = with pkgs;[

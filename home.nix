@@ -61,7 +61,8 @@
     "Xcursor.size" = 16;
     "Xft.dpi" = 144;
   };
-
+  
+  nixpkgs.config.allowUnfree = true;
   # 通过 home.packages 安装一些常用的软件
   # 这些软件将仅在当前用户下可用，不会影响系统级别的配置
   # 建议将所有 GUI 软件，以及与 OS 关系不大的 CLI 软件，都通过 home.packages 安装
@@ -80,6 +81,9 @@
     yq-go # yaml processor https://github.com/mikefarah/yq
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
+    imv # Command line image viewer for tiling window managers
+    flameshot # Powerful yet simple to use screenshot software
+    mpv # General-purpose media player, fork of MPlayer and mplayer2
 
     # networking tools
     mtr # A network diagnostic tool
@@ -94,6 +98,7 @@
     # misc
     cowsay
 
+
     # nix related
     #
     # it provides the command `nom` works just like `nix`
@@ -101,7 +106,6 @@
     nix-output-monitor
 
     # productivity
-    hugo # static site generator
     glow # markdown previewer in terminal
 
     btop  # replacement of htop/nmon
@@ -119,6 +123,10 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+
+    # games
+    osu-lazer-bin
+    etterna
   ];
 
   # git 相关配置

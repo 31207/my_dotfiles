@@ -1,11 +1,13 @@
 font pango:Noto Sans CJK SC 10
-for_window [class=".*"] border pixel 1
+for_window [class=".*"] border pixel 0
 new_window 1pixel
 for_window [class="QQ"] floating enable
 for_window [class="scrcpy"] floating enable
 for_window [class="dolphin"] floating enable
 for_window [class="Telegram"] floating enable
 for_window [class="pavucontrol"] floating enable
+for_window [class="imv"] floating enable
+for_window [class="mpv"] floating enable
 gaps inner 0
 gaps outer 0
 
@@ -116,14 +118,14 @@ bindsym $win+Shift+0 move container to workspace 10
 # 按下win键时，可以使用鼠标移动窗口位置，以及改变窗口大小
 floating_modifier $win
 
-exec export GTK_IM_MODULE=fcitx
-exec export QT_IM_MODULE=fcitx
-exec export XMODIFIERS=fcitx
-exec export SDL_IM_MODULE=fcitx
+# exec export GTK_IM_MODULE=fcitx
+# exec export QT_IM_MODULE=fcitx
+# exec export XMODIFIERS=fcitx
+# exec export SDL_IM_MODULE=fcitx
 
 
 # exec ~/.config/i3/i3-video-wallpaper/setup.sh -anwb ~/Videos/Nahida/nahida4.mp4 
-exec feh --bg-scale ~/Pictures/bg.png
+exec feh --bg-scale ~/Pictures/background/1.png
 exec --no-startup-id picom --config ~/.config/picom.conf
 exec ~/.config/polybar/forest/launch.sh
 exec --no-startup-id dunst
@@ -131,3 +133,4 @@ exec fcitx5
 # exec /usr/lib/xfce-polkit/xfce-polkit
 # exec nm-applet
 exec conky
+exec flameshot
