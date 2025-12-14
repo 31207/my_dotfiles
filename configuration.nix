@@ -92,9 +92,6 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
     shell = pkgs.fish;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID19OobR/BfRaQJpKDnSM9fHJZMicZa155Cp0KC0ohFc 1692038362@qq.com"
-    ];
   };
 
   systemd = {
@@ -165,6 +162,48 @@
   python313Packages.pipx
   nb-cli
   go-musicfox
+     # create a fhs environment by command `fhs`, so we can run non-nixos packages in nixos!
+    (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
+      pkgs.buildFHSEnv (base // {
+      name = "fhs";
+      targetPkgs = pkgs:
+        # pkgs.buildFHSEnv 只提供一个最小的 FHS 环境，缺少很多常用软件所必须的基础包
+        # 所以直接使用它很可能会报错
+        #
+        # pkgs.appimageTools 提供了大多数程序常用的基础包，所以我们可以直接用它来补充
+        (base.targetPkgs pkgs) ++ (with pkgs; [
+          pkg-config
+          ncurses
+          python313Packages.python
+          python313Packages.pyqt5
+              # core
+          glibc
+          gcc
+          binutils
+
+          # GUI support
+          xorg.libX11
+          xorg.libXrender
+          xorg.libXext
+          xorg.libXrandr
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXfixes
+
+          # GTK/Qt optional
+          gtk3
+          qt5.full
+
+          # fonts
+          fontconfig
+          freetype
+                # 如果你的 FHS 程序还有其他依赖，把它们添加在这里
+        ]
+      );
+      profile = "export FHS=1";
+      runScript = "bash";
+      extraOutputsToInstall = ["dev"];
+    }))
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
